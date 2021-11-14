@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>RML</title>
+    <link href="style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../pagina inicial/assets/img/folha2.png">
+
+</head>
+
+<body>
+    <form>
+        <h3>Entrar</h3>
+        <input id="email" type="text" name="email" placeholder="cpf..." />
+        <input type="password" id="senha" name="senha" placeholder="senha..." />
+        <input type="button" onclick='x()' name="acao" value="Enviar" />
+    </form>
+    <script>
+        function x() {
+            let url = 'http://10.87.207.18:8080/RMLback/login'
+            var settings = {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({  
+                    "cpf":document.querySelectorAll('input')[0].value, 
+                    "senha":document.querySelectorAll('input')[1].value
+                })
+            }
+
+            async function getiten() {
+                let iten = await fetch(url, settings)
+                let response = await iten.json()
+                return response
+            }
+            getiten().then(resp => {
+                console.log(resp)
+            })
+        }
+    </script>
+</body>
+
+</html>
